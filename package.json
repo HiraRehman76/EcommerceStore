@@ -8,12 +8,14 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@types/react-redux": "^7.1.34",
+    "antd": "^5.22.7",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.13",
     "typescript": "^4.9.5"
   },
   "scripts": {

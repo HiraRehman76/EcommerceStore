@@ -4,17 +4,22 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
+import GeneralStyle from './style/GeneralStyle';
+import SubNavbar from './components/SubNavbar';
+
 
 const App: React.FC = () => (
   <Router>
-    <Navbar />
-    <main style={{ padding: '1rem' }}>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cart" element={<CartPage />} />
-      </Routes>
-    </main>
-    <Footer />
+    <GeneralStyle />
+      <Navbar />
+      <SubNavbar />
+      <main style={{ padding: '1rem' }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </main>
+      <Footer />
   </Router>
 );
 
