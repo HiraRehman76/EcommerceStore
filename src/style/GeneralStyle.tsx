@@ -14,6 +14,11 @@ const GeneralStyle = createGlobalStyle`
     width: 80%;
     background: #fff;
   }
+  .container {
+    height: calc(100vh);
+    padding: 1rem;
+    background: #fff;
+  }
   `;
 
 export default GeneralStyle;

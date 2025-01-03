@@ -13,7 +13,7 @@ const App: React.FC = () => (
     <GeneralStyle />
       <Navbar />
       <SubNavbar />
-      <main style={{ padding: '1rem' }}>
+      <main className='container'>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/cart" element={<CartPage />} />
