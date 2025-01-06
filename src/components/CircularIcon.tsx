@@ -26,7 +26,7 @@ type Props = {
 const CircularIcon = (props: Props) => {
   const { chilldren } = props;
   return (
-    <Wrapper>
+    <Wrapper className='circular-icon-wrapper'>
       {chilldren}
     </Wrapper>
   );
