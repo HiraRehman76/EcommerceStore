@@ -5,6 +5,7 @@ import SupportedBrandComponent from '../components/SupportedBrandComponent';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
 import RadioButtonText from '../components/RadioButtonText';
+import FeatureComponent from '../components/FeatureComponent';
 
 const placeholderProducts = [
   { id: 1, name: 'Hobo Small', price: '$195.00 CAD', image:'bag1.png' },
@@ -23,6 +24,13 @@ const supportedPartner = [
   { id: 3, name: 'reebok-transparent.png' },
   { id: 4, name: 'puma-transparent.png' },
 ];
+
+const featureSupported = [
+  { id: 1, hText: 'Express Delivery', pText:'DHL Express delivery worldwidde from our bag company', icon:'express.png' },
+  { id: 2, hText: 'Payement in 3x', pText:'DHL Express delivery worldwidde from our bag company', icon:'payment.png' },
+  { id: 3, hText: 'Free Returns', pText:'DHL Express delivery worldwidde from our bag company', icon:'return.png' },
+];
+
 const ProductWrapper =styled(Row)``;
 
 const HomePage: React.FC = () => (
@@ -30,7 +38,7 @@ const HomePage: React.FC = () => (
     <Heading text='We Supported By' />
     <Row gutter={[24, 24]}>
       {supportedPartner.map(product => (
-      <Col span={4}>
+      <Col span={6}>
         <SupportedBrandComponent chilldren={<img src={product.name} alt='cart-icon' />} />
       </Col>
       ))}
@@ -47,6 +55,14 @@ const HomePage: React.FC = () => (
         </Col>
       ))}
     </ProductWrapper>
+    <Heading text='We Supported By' />
+    <Row gutter={[24, 24]}>
+      {featureSupported.map((feature) => (
+        <Col span={8}>
+          <FeatureComponent hText={feature.hText} pText={feature.pText} icon={feature.icon} />
+        </Col>
+      ))}
+    </Row>
   </div>
 );
 
