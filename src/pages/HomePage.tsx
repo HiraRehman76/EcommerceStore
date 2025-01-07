@@ -6,6 +6,7 @@ import { Col, Row } from 'antd';
 import styled from 'styled-components';
 import RadioButtonText from '../components/RadioButtonText';
 import FeatureComponent from '../components/FeatureComponent';
+import CatelogueComponent from '../components/CatelogueComponent';
 
 const placeholderProducts = [
   { id: 1, name: 'Hobo Small', price: '$195.00 CAD', image:'bag1.png' },
@@ -29,6 +30,11 @@ const featureSupported = [
   { id: 1, hText: 'Express Delivery', pText:'DHL Express delivery worldwidde from our bag company', icon:'express.png' },
   { id: 2, hText: 'Payement in 3x', pText:'DHL Express delivery worldwidde from our bag company', icon:'payment.png' },
   { id: 3, hText: 'Free Returns', pText:'DHL Express delivery worldwidde from our bag company', icon:'return.png' },
+];
+
+const catelougeComponent = [
+  { id: 1, hText: 'Modern Qualitty & Mind Refreshing Color Bag', link:'', icon:'bagwithbackground.jpg' },
+  { id: 2, hText: 'Latest Fashion & Beauty Leather Bag For You!', link:'', icon:'bagwithbackground2.jpg' },
 ];
 
 const ProductWrapper =styled(Row)``;
@@ -60,6 +66,13 @@ const HomePage: React.FC = () => (
       {featureSupported.map((feature) => (
         <Col span={8}>
           <FeatureComponent hText={feature.hText} pText={feature.pText} icon={feature.icon} />
+        </Col>
+      ))}
+    </Row>
+    <Row gutter={[24, 24]} style={{marginTop : '16px'}}>
+      {catelougeComponent.map((catelogue) => (
+        <Col span={12}>
+          <CatelogueComponent hText={catelogue.hText} link={catelogue.link} icon={catelogue.icon} />
         </Col>
       ))}
     </Row>

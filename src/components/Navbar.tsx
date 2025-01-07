@@ -32,7 +32,7 @@ const Navbar: React.FC = () => (
   <NavbarWrapper>
     <div className='left-side-navbar'>
       <CircularIcon
-        chilldren={<img src='menu.png' alt='cart-icon' />}
+        icon='menu.png'
       />
       </div>
     <Link to="/" className='logo-navbar-link'>
@@ -41,13 +41,13 @@ const Navbar: React.FC = () => (
     </Link>
     <div className='right-side-navbar'>
       <CircularIcon
-        chilldren={<img src='favorite.png' alt='cart-icon' />}
+        icon='favorite.png'
       />
       <CircularIcon
-        chilldren={<img src='cart.png' alt='cart-icon' />}
+        icon='cart.png'   
       />
       <CircularIcon
-        chilldren={<img src='user.png' alt='cart-icon' />}
+        icon='user.png' 
       />
       </div>
   </NavbarWrapper>

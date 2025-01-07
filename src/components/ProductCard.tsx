@@ -59,8 +59,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image }) => 
         <p className='product-price'>{price}</p>
       </div>
       <div className='right-side-header'>
-        <CircularIcon chilldren={<img src='favorite.png' alt='cart-icon' />}/>
-        <CircularIcon chilldren={<img src='cart.png' alt='cart-icon' />}/>
+        <CircularIcon icon='favorite.png'/>
+        <CircularIcon icon='cart.png'/>
       </div>
     </div>
     <img src={image} alt='cart-icon' className='product-image' />

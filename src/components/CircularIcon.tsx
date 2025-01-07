@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   height: 20px;
   border: 1px solid ${primaryHeadingColor};
   border-radius: 50%;
-  img {
+  .image-inside {
     width: 65%;
     height: 65%;
     object-fit: cover;
@@ -21,13 +21,13 @@ const Wrapper = styled.div`
 `;
 
 type Props = {
-  chilldren: React.ReactNode;
+  icon: string;
 };
 const CircularIcon = (props: Props) => {
-  const { chilldren } = props;
+  const { icon } = props;
   return (
     <Wrapper className='circular-icon-wrapper'>
-      {chilldren}
+      <img src={icon} alt='cart-icon' className='image-inside'/>
     </Wrapper>
   );
 }
