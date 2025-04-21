@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
+import AccountPage from './pages/AccountPage';
+import ProductPage from './pages/ProductPage';
 import GeneralStyle from './style/GeneralStyle';
 import SubNavbar from './components/SubNavbar';
 
@@ -19,6 +21,8 @@ const App: React.FC = () => (
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
       </main>
       <Footer />

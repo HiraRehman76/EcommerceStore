@@ -4,6 +4,7 @@ import { Card, Button } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = styled.section`
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
@@ -45,6 +46,7 @@ const ProductGrid = styled.div`
 
 const ProductCard = styled(Card)`
   transition: transform 0.3s ease;
+  cursor: pointer;
   
   &:hover {
     transform: translateY(-5px);
@@ -69,6 +71,7 @@ const ProductCard = styled(Card)`
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Sample products data with real images from Unsplash
   const products = [
@@ -116,11 +119,16 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = (e: React.MouseEvent, product: any) => {
+    e.stopPropagation(); // Prevent card click when clicking the button
     dispatch(addToCart({
       ...product,
       quantity: 1
     }));
+  };
+
+  const handleProductClick = (productId: number) => {
+    navigate(`/product/${productId}`);
   };
 
   return (
@@ -141,6 +149,7 @@ const HomePage: React.FC = () => {
               key={product.id}
               hoverable
               cover={<img alt={product.name} src={product.image} />}
+              onClick={() => handleProductClick(product.id)}
             >
               <Card.Meta
                 title={product.name}
@@ -154,7 +163,7 @@ const HomePage: React.FC = () => {
               <Button 
                 type="primary" 
                 icon={<ShoppingCartOutlined />}
-                onClick={() => handleAddToCart(product)}
+                onClick={(e) => handleAddToCart(e, product)}
                 style={{ marginTop: '1rem', width: '100%' }}
               >
                 Add to Cart

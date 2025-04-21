@@ -4,6 +4,7 @@ import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/
 import { Badge } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { useNavigate } from 'react-router-dom';
 
 const Nav = styled.nav`
   background: white;
@@ -63,23 +64,24 @@ const SearchBar = styled.div`
 `;
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <Nav>
       <NavContainer>
-        <Logo>ShopEase</Logo>
+        <Logo onClick={() => navigate('/')}>ShopEase</Logo>
         <SearchBar>
           <SearchOutlined style={{ color: '#636e72' }} />
           <input type="text" placeholder="Search products..." />
         </SearchBar>
         <NavItems>
-          <NavItem>
+          <NavItem onClick={() => navigate('/account')}>
             <UserOutlined />
             <span>Account</span>
           </NavItem>
-          <NavItem>
+          <NavItem onClick={() => navigate('/cart')}>
             <Badge count={totalItems} showZero>
               <ShoppingCartOutlined style={{ fontSize: '1.2rem' }} />
             </Badge>
