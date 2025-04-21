@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Button } from 'antd';
+import { Card, Button, message } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
 import { useNavigate } from 'react-router-dom';
+import { RootState } from '../redux/store';
 
 const HeroSection = styled.section`
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
@@ -72,6 +73,7 @@ const ProductCard = styled(Card)`
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const searchQuery = useSelector((state: RootState) => state.search.query);
 
   // Sample products data with real images from Unsplash
   const products = [
@@ -119,12 +121,18 @@ const HomePage: React.FC = () => {
     }
   ];
 
+  const filteredProducts = products.filter(product => 
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const handleAddToCart = (e: React.MouseEvent, product: any) => {
     e.stopPropagation(); // Prevent card click when clicking the button
     dispatch(addToCart({
       ...product,
       quantity: 1
     }));
+    message.success(`${product.name} added to cart`);
   };
 
   const handleProductClick = (productId: number) => {
@@ -144,7 +152,7 @@ const HomePage: React.FC = () => {
       <FeaturedSection>
         <h2>Featured Products</h2>
         <ProductGrid>
-          {products.map(product => (
+          {filteredProducts.map(product => (
             <ProductCard
               key={product.id}
               hoverable

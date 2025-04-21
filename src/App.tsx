@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
 import AccountPage from './pages/AccountPage';
 import ProductPage from './pages/ProductPage';
+import CategoriesPage from './pages/CategoriesPage';
 import GeneralStyle from './style/GeneralStyle';
 import SubNavbar from './components/SubNavbar';
 
@@ -23,6 +24,7 @@ const App: React.FC = () => (
           <Route path="/cart" element={<CartPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/categories/:category" element={<CategoriesPage />} />
         </Routes>
       </main>
       <Footer />

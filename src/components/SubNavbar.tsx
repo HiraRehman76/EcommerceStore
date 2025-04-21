@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const SubNav = styled.nav`
   background: #2d3436;
@@ -25,15 +26,28 @@ const SubNavItem = styled.div`
 `;
 
 const SubNavbar: React.FC = () => {
+  const navigate = useNavigate();
+
+  const categories = [
+    { name: 'New Arrivals', path: '/categories/new-arrivals' },
+    { name: 'Men', path: '/categories/men' },
+    { name: 'Women', path: '/categories/women' },
+    { name: 'Electronics', path: '/categories/electronics' },
+    { name: 'Home & Living', path: '/categories/home-living' },
+    { name: 'Sale', path: '/categories/sale' }
+  ];
+
   return (
     <SubNav>
       <SubNavContainer>
-        <SubNavItem>New Arrivals</SubNavItem>
-        <SubNavItem>Men</SubNavItem>
-        <SubNavItem>Women</SubNavItem>
-        <SubNavItem>Electronics</SubNavItem>
-        <SubNavItem>Home & Living</SubNavItem>
-        <SubNavItem>Sale</SubNavItem>
+        {categories.map((category) => (
+          <SubNavItem 
+            key={category.path}
+            onClick={() => navigate(category.path)}
+          >
+            {category.name}
+          </SubNavItem>
+        ))}
       </SubNavContainer>
     </SubNav>
   );

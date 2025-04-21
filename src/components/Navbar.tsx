@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
-import { Badge } from 'antd';
-import { useSelector } from 'react-redux';
+import { Badge, Input } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useNavigate } from 'react-router-dom';
+import { setSearchQuery } from '../redux/searchSlice';
 
 const Nav = styled.nav`
   background: white;
@@ -65,16 +66,29 @@ const SearchBar = styled.div`
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (value: string) => {
+    dispatch(setSearchQuery(value));
+    navigate('/');
+  };
 
   return (
     <Nav>
       <NavContainer>
         <Logo onClick={() => navigate('/')}>ShopEase</Logo>
         <SearchBar>
-          <SearchOutlined style={{ color: '#636e72' }} />
-          <input type="text" placeholder="Search products..." />
+          <Input
+            placeholder="Search products..."
+            prefix={<SearchOutlined style={{ color: '#636e72' }} />}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            onPressEnter={(e) => handleSearch((e.target as HTMLInputElement).value)}
+            allowClear
+          />
         </SearchBar>
         <NavItems>
           <NavItem onClick={() => navigate('/account')}>
