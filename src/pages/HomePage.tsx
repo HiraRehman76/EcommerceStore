@@ -1,82 +1,170 @@
 import React from 'react';
-import ProductCard from '../components/ProductCard';
-import Heading from '../components/Heading';
-import SupportedBrandComponent from '../components/SupportedBrandComponent';
-import { Col, Row } from 'antd';
 import styled from 'styled-components';
-import RadioButtonText from '../components/RadioButtonText';
-import FeatureComponent from '../components/FeatureComponent';
-import CatelogueComponent from '../components/CatelogueComponent';
+import { Card, Button } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/cartSlice';
 
-const placeholderProducts = [
-  { id: 1, name: 'Hobo Small', price: '$195.00 CAD', image:'bag1.png' },
-  { id: 2, name: 'Hobo Small', price: '$195.00 CAD', image:'bag2.jpeg' },
-  { id: 3, name: 'Hobo Small', price: '$195.00 CAD', image:'bag3.jpeg' },
-  { id: 4, name: 'Hobo Small', price: '$195.00 CAD', image:'bag4.jpeg' },
-  { id: 5, name: 'Hobo Small', price: '$195.00 CAD', image:'bag5.jpeg' },
-  { id: 6, name: 'Hobo Small', price: '$195.00 CAD', image:'bag6.jpeg' },
-  { id: 7, name: 'Hobo Small', price: '$195.00 CAD', image:'bag7.jpeg' },
-  { id: 8, name: 'Hobo Small', price: '$195.00 CAD', image:'bag8.jpeg' },
-];
+const HeroSection = styled.section`
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+`;
 
-const supportedPartner = [
-  { id: 1, name: 'nikeTraansparent.png' },
-  { id: 2, name: 'ETSY-tranparent.png' },
-  { id: 3, name: 'reebok-transparent.png' },
-  { id: 4, name: 'puma-transparent.png' },
-];
+const FeaturedSection = styled.section`
+  padding: 4rem 0;
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+`;
 
-const featureSupported = [
-  { id: 1, hText: 'Express Delivery', pText:'DHL Express delivery worldwidde from our bag company', icon:'express.png' },
-  { id: 2, hText: 'Payement in 3x', pText:'DHL Express delivery worldwidde from our bag company', icon:'payment.png' },
-  { id: 3, hText: 'Free Returns', pText:'DHL Express delivery worldwidde from our bag company', icon:'return.png' },
-];
+const ProductGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+`;
 
-const catelougeComponent = [
-  { id: 1, hText: 'Modern Qualitty & Mind Refreshing Color Bag', link:'', icon:'bagwithbackground.jpg' },
-  { id: 2, hText: 'Latest Fashion & Beauty Leather Bag For You!', link:'', icon:'bagwithbackground2.jpg' },
-];
+const ProductCard = styled(Card)`
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+  
+  .ant-card-cover {
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  &:hover img {
+    transform: scale(1.1);
+  }
+`;
 
-const ProductWrapper =styled(Row)``;
+const HomePage: React.FC = () => {
+  const dispatch = useDispatch();
 
-const HomePage: React.FC = () => (
-  <div>
-    <Heading text='We Supported By' />
-    <Row gutter={[24, 24]}>
-      {supportedPartner.map(product => (
-      <Col span={6}>
-        <SupportedBrandComponent chilldren={<img src={product.name} alt='cart-icon' />} />
-      </Col>
-      ))}
-    </Row>
-      <div className='radio-button-bar'>
-        <RadioButtonText buttonText="All Collections" />
-        <RadioButtonText buttonText="New Collections" />
-        <RadioButtonText buttonText="Popular Collections" />
-      </div>
-    <ProductWrapper gutter={[24, 24]}>
-      {placeholderProducts.map(product => (
-        <Col span={6}>
-          <ProductCard key={product.id} {...product} />
-        </Col>
-      ))}
-    </ProductWrapper>
-    <Heading text='We Supported By' />
-    <Row gutter={[24, 24]}>
-      {featureSupported.map((feature) => (
-        <Col span={8}>
-          <FeatureComponent hText={feature.hText} pText={feature.pText} icon={feature.icon} />
-        </Col>
-      ))}
-    </Row>
-    <Row gutter={[24, 24]} style={{marginTop : '16px'}}>
-      {catelougeComponent.map((catelogue) => (
-        <Col span={12}>
-          <CatelogueComponent hText={catelogue.hText} link={catelogue.link} icon={catelogue.icon} />
-        </Col>
-      ))}
-    </Row>
-  </div>
-);
+  // Sample products data with real images from Unsplash
+  const products = [
+    {
+      id: 1,
+      name: 'Wireless Headphones',
+      price: 199.99,
+      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      description: 'Premium wireless headphones with noise cancellation'
+    },
+    {
+      id: 2,
+      name: 'Smart Watch',
+      price: 249.99,
+      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      description: 'Latest smart watch with health monitoring'
+    },
+    {
+      id: 3,
+      name: 'Camera Lens',
+      price: 599.99,
+      image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      description: 'Professional camera lens for stunning photos'
+    },
+    {
+      id: 4,
+      name: 'Gaming Mouse',
+      price: 79.99,
+      image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      description: 'High-precision gaming mouse with RGB lighting'
+    },
+    {
+      id: 5,
+      name: 'Mechanical Keyboard',
+      price: 129.99,
+      image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      description: 'Mechanical keyboard with customizable keys'
+    },
+    {
+      id: 6,
+      name: 'Bluetooth Speaker',
+      price: 89.99,
+      image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      description: 'Portable Bluetooth speaker with great sound'
+    }
+  ];
+
+  const handleAddToCart = (product: any) => {
+    dispatch(addToCart({
+      ...product,
+      quantity: 1
+    }));
+  };
+
+  return (
+    <>
+      <HeroSection>
+        <div>
+          <h1>Welcome to ShopEase</h1>
+          <p>Discover amazing products at unbeatable prices</p>
+          <Button type="primary" size="large">Shop Now</Button>
+        </div>
+      </HeroSection>
+      
+      <FeaturedSection>
+        <h2>Featured Products</h2>
+        <ProductGrid>
+          {products.map(product => (
+            <ProductCard
+              key={product.id}
+              hoverable
+              cover={<img alt={product.name} src={product.image} />}
+            >
+              <Card.Meta
+                title={product.name}
+                description={
+                  <>
+                    <div>${product.price.toFixed(2)}</div>
+                    <div>{product.description}</div>
+                  </>
+                }
+              />
+              <Button 
+                type="primary" 
+                icon={<ShoppingCartOutlined />}
+                onClick={() => handleAddToCart(product)}
+                style={{ marginTop: '1rem', width: '100%' }}
+              >
+                Add to Cart
+              </Button>
+            </ProductCard>
+          ))}
+        </ProductGrid>
+      </FeaturedSection>
+    </>
+  );
+};
 
 export default HomePage;

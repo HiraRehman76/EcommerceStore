@@ -1,56 +1,94 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { primaryHeadingColor } from '../utilis/utilisStyle';
-import CircularIcon from './CircularIcon';
+import { ShoppingCartOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
+import { Badge } from 'antd';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
-const NavbarWrapper = styled.nav`
+const Nav = styled.nav`
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+`;
+
+const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
-  background-color: #f8f8f8;
-  .logo-navbar-link {
-    display: flex;
-    align-items: center;
-    color: ${primaryHeadingColor};
-    text-decoration: none;
-    font-weight: 700;
-    .logo-navbar {
-      margin-right: 10px;
-      height: 20px;
-      width: 20px;
-    }
-  }
-  .right-side-navbar {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  align-items: center;
+  padding: 1rem 2rem;
+`;
+
+const Logo = styled.h1`
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3436;
+  cursor: pointer;
+`;
+
+const NavItems = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const NavItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: #0984e3;
   }
 `;
 
-const Navbar: React.FC = () => (
-  <NavbarWrapper>
-    <div className='left-side-navbar'>
-      <CircularIcon
-        icon='menu.png'
-      />
-      </div>
-    <Link to="/" className='logo-navbar-link'>
-      <img src='store.png' alt='store-logo' className='logo-navbar'/>
-      E-Commerce Store
-    </Link>
-    <div className='right-side-navbar'>
-      <CircularIcon
-        icon='favorite.png'
-      />
-      <CircularIcon
-        icon='cart.png'   
-      />
-      <CircularIcon
-        icon='user.png' 
-      />
-      </div>
-  </NavbarWrapper>
-);
+const SearchBar = styled.div`
+  display: flex;
+  align-items: center;
+  background: #f1f2f6;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  width: 300px;
+  
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    padding: 0.5rem;
+  }
+`;
+
+const Navbar: React.FC = () => {
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  return (
+    <Nav>
+      <NavContainer>
+        <Logo>ShopEase</Logo>
+        <SearchBar>
+          <SearchOutlined style={{ color: '#636e72' }} />
+          <input type="text" placeholder="Search products..." />
+        </SearchBar>
+        <NavItems>
+          <NavItem>
+            <UserOutlined />
+            <span>Account</span>
+          </NavItem>
+          <NavItem>
+            <Badge count={totalItems} showZero>
+              <ShoppingCartOutlined style={{ fontSize: '1.2rem' }} />
+            </Badge>
+            <span>Cart</span>
+          </NavItem>
+        </NavItems>
+      </NavContainer>
+    </Nav>
+  );
+};
 
 export default Navbar;

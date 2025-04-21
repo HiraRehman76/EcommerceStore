@@ -1,55 +1,42 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { primaryHeadingColor } from '../utilis/utilisStyle';
-import Search from './Search';
 
-const SubNavbarWrapper = styled.nav`
-  display: flex;
-  padding: 1rem;
-  background-color: #fff;
-  gap: 1rem;
-.tab-item {
-  &:hover {
-    color: #F3F3F3;
-    background-color: ${primaryHeadingColor};
-  }
-  background-color: #F3F3F3;
-  color: ${primaryHeadingColor};
-  border-radius: 8px;
-  padding: 8px 16px;
-  text-decoration: none;
-}
+const SubNav = styled.nav`
+  background: #2d3436;
+  padding: 0.5rem 0;
 `;
-const SubNavbar: React.FC = () => (
-  <SubNavbarWrapper>
-    <Link className="tab-item" to="/">
-      Men
-    </Link>
-    <Link className="tab-item" to="/cart">
-      Women
-    </Link>
-    <Link className="tab-item" to="/cart">
-      Children
-    </Link>
-    <Link className="tab-item" to="/cart">
-      Brand
-    </Link>
-    <Link className="tab-item" to="/cart">
-      New
-    </Link>
-    <Link className="tab-item" to="/cart">
-      Popular
-    </Link>
-    <Search />
-    <Link className="tab-item" to="/cart">
-      About
-    </Link>
-    <Link className="tab-item" to="/cart">
-      FAQs
-    </Link>
-  </SubNavbarWrapper>
-);
+
+const SubNavContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+`;
+
+const SubNavItem = styled.div`
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  
+  &:hover {
+    background: #0984e3;
+  }
+`;
+
+const SubNavbar: React.FC = () => {
+  return (
+    <SubNav>
+      <SubNavContainer>
+        <SubNavItem>New Arrivals</SubNavItem>
+        <SubNavItem>Men</SubNavItem>
+        <SubNavItem>Women</SubNavItem>
+        <SubNavItem>Electronics</SubNavItem>
+        <SubNavItem>Home & Living</SubNavItem>
+        <SubNavItem>Sale</SubNavItem>
+      </SubNavContainer>
+    </SubNav>
+  );
+};
 
 export default SubNavbar;

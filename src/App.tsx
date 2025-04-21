@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -7,10 +9,10 @@ import CartPage from './pages/CartPage';
 import GeneralStyle from './style/GeneralStyle';
 import SubNavbar from './components/SubNavbar';
 
-
 const App: React.FC = () => (
-  <Router>
-    <GeneralStyle />
+  <Provider store={store}>
+    <Router>
+      <GeneralStyle />
       <Navbar />
       <SubNavbar />
       <main className='container'>
@@ -20,7 +22,8 @@ const App: React.FC = () => (
         </Routes>
       </main>
       <Footer />
-  </Router>
+    </Router>
+  </Provider>
 );
 
 export default App;

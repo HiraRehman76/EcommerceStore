@@ -1,54 +1,52 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GeneralStyle = createGlobalStyle`
-  body {
-    background-image: url('background.webp');
-    background-size: cover;
+const GlobalStyle = createGlobalStyle`
+  * {
     margin: 0;
-    padding: 60px 0;
-    display: flex;
-    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
   }
-  #root {
-    height: calc(100vh - 60px);
-    width: 80%;
-    background: #fff;
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
   }
+
   .container {
-    /* height: calc(100vh); */
-    height: fit-content;
-    padding: 1rem;
-    background: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
-  .radio-button-bar {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
-  .ant-radio-wrapper {
-    &:hover {
-      .ant-radio-inner {
-        border-color: #000;
-      }
-    }
-    &::after {
 
-    }
-    .ant-radio {
-      &::after {
-
-      }
-      &.ant-radio-checked {
-        .ant-radio-inner {
-          border-color: #000;
-          background-color: #000;
-          &::after {
-            background-color: #000;
-          }
-        }
-      }
-    }
+  button {
+    cursor: pointer;
+    border: none;
+    outline: none;
   }
-  `;
 
-export default GeneralStyle;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+`;
+
+export default GlobalStyle;
